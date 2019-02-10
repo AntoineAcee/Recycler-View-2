@@ -1,5 +1,6 @@
 package com.example.antoinelefevre.recyclerviewtwo;
 
+import android.graphics.Color;
 import android.media.Image;
 
 import java.sql.Timestamp;
@@ -52,7 +53,16 @@ public class Appointment {
         return reason;
     }
 
+    public int getStatusColor(){
+        if (status == Status.ACCEPTED)
+            return Color.GREEN;
+        return Color.RED;
+    }
+
     public String getStatus() {
+        if (status == null) {
+            return "";
+        }
         switch (status) {
             case ACCEPTED:
                 return "Accepted";
@@ -61,7 +71,7 @@ public class Appointment {
             case NO_SHOW:
                 return "No Show";
         }
-        return null;
+        return "";
     }
 
     public void setDateFormat(SimpleDateFormat dateFormat) {

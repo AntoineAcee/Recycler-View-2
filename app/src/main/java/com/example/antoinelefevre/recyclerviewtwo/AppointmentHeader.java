@@ -11,7 +11,7 @@ public class AppointmentHeader {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm a");
 
 
-    public AppointmentHeader(boolean isAm, int nbAppointment, Timestamp endDate, Timestamp startDate) {
+    public AppointmentHeader(boolean isAm, int nbAppointment, Timestamp startDate, Timestamp endDate) {
         this.isAm = isAm;
         this.nbAppointment = nbAppointment;
         this.endDate = endDate;

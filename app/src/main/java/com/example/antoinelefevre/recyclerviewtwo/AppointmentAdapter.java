@@ -1,5 +1,8 @@
 package com.example.antoinelefevre.recyclerviewtwo;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,9 +95,21 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         appointmentViewHolder.userImage.setImageResource(appointment.getUser().getImageRessource());
         appointmentViewHolder.userName.setText(appointment.getUser().getName());
         appointmentViewHolder.reason.setText(appointment.getReason());
+        appointmentViewHolder.status.setVisibility(View.INVISIBLE);
         if (!appointment.getStatus().isEmpty()) {
             appointmentViewHolder.status.setText(appointment.getStatus());
+            appointmentViewHolder.status.setTextColor(appointment.getStatusColor());
+            DrawableCompat.setTintList(appointmentViewHolder.status.getBackground(), ColorStateList.valueOf(adjustAlpha(appointment.getStatusColor(), (float) 0.1)));
+            appointmentViewHolder.status.setVisibility(View.VISIBLE);
         }
+    }
+
+    public int adjustAlpha(int color, float factor) {
+        int alpha = Math.round(Color.alpha(color) * factor);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        return Color.argb(alpha, red, green, blue);
     }
 
     @Override
@@ -118,7 +133,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         @BindView(R.id.appointment_header_title) TextView appointmentHeaderTitle;
         @BindView(R.id.appointment_header_meet_number) TextView meetNumber;
-        @BindView(R.id.appointment_item_start_hour) TextView startHour;
+        @BindView(R.id.appointment_header_start_hour) TextView startHour;
         @BindView(R.id.appointment_header_end_hour) TextView endHour;
 
         public HeaderViewHolder(View itemView) {

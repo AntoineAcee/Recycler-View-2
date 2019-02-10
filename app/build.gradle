@@ -35,4 +35,5 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$project.butterKnifeVersion"
 
     implementation "com.android.support:recyclerview-v7:$project.appCompatVersion"
+    compile 'devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4'
 }
