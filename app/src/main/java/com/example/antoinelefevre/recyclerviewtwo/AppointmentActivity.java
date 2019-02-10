@@ -52,19 +52,19 @@ public class AppointmentActivity extends AppCompatActivity implements ItemClickL
         User user4 = new User("Ayush Kushwaha");
         User user5 = new User("Anchal Sharma");
 
-        try { date = dateFormat.parse("12/01/2019 8:30"); } catch (ParseException e) {}
+        try { date = dateFormat.parse("12/02/2019 8:30"); } catch (ParseException e) {}
         appointments.add(new Appointment(user1, new Timestamp(date.getTime()), true, "Video Consultation", Appointment.Status.ACCEPTED));
 
-        try { date = dateFormat.parse("12/01/2019 11:30"); } catch (ParseException e) {}
+        try { date = dateFormat.parse("12/02/2019 11:30"); } catch (ParseException e) {}
         appointments.add(new Appointment(user2, new Timestamp(date.getTime()), true, "Phone Consultation"));
 
-        try { date = dateFormat.parse("12/01/2019 4:30"); } catch (ParseException e) {}
+        try { date = dateFormat.parse("12/02/2019 4:30"); } catch (ParseException e) {}
         appointments.add(new Appointment(user3, new Timestamp(date.getTime()), false, "Video Consultation"));
 
-        try { date = dateFormat.parse("12/01/2019 5:30"); } catch (ParseException e) {}
+        try { date = dateFormat.parse("12/02/2019 5:30"); } catch (ParseException e) {}
         appointments.add(new Appointment(user4, new Timestamp(date.getTime()), false, "Chat conversation", Appointment.Status.CANCELED));
 
-        try { date = dateFormat.parse("12/01/2019 8:30"); } catch (ParseException e) {}
+        try { date = dateFormat.parse("12/02/2019 8:30"); } catch (ParseException e) {}
         appointments.add(new Appointment(user5, new Timestamp(date.getTime()), true, "Phone Consultation", Appointment.Status.NO_SHOW));
 
         Date today = new Date();
