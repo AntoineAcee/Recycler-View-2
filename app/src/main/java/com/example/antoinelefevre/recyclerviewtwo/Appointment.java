@@ -1,7 +1,6 @@
 package com.example.antoinelefevre.recyclerviewtwo;
 
 import android.graphics.Color;
-import android.media.Image;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -57,6 +56,10 @@ public class Appointment {
         if (status == Status.ACCEPTED)
             return Color.GREEN;
         return Color.RED;
+    }
+
+    public Status getEnumStatus(){
+        return status;
     }
 
     public String getStatus() {

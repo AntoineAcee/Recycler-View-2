@@ -21,16 +21,23 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private ArrayList<Appointment> appointments;
     private ArrayList<Object> objects = new ArrayList<>();
     private ArrayList<Integer> sectionIndexes = new ArrayList<>();
+    private ItemClickListener clickListener;
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
     public AppointmentAdapter(ArrayList<Appointment> appointments) {
+        setNewArray(appointments);
+    }
+
+    public void setNewArray(ArrayList<Appointment> appointments){
         this.appointments = appointments;
         this.sortAppointment();
     }
 
     private void sortAppointment() {
+        objects.clear();
+        sectionIndexes.clear();
         ArrayList<Appointment> amAppointments =  new ArrayList<>();
         ArrayList<Appointment> pmAppointments = new ArrayList<>();
 
@@ -102,6 +109,13 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             DrawableCompat.setTintList(appointmentViewHolder.status.getBackground(), ColorStateList.valueOf(adjustAlpha(appointment.getStatusColor(), (float) 0.1)));
             appointmentViewHolder.status.setVisibility(View.VISIBLE);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (clickListener != null) clickListener.onClickAppointement(view, appointment);
+            }
+        });
     }
 
     public int adjustAlpha(int color, float factor) {
@@ -127,6 +141,10 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private boolean isPositionHeader(int position) {
         return sectionIndexes.contains(position);
+    }
+
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.clickListener = itemClickListener;
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
