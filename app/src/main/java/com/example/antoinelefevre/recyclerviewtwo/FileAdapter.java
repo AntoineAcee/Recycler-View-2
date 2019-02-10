@@ -7,18 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +22,8 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
     private HashMap<String, ArrayList<File>> filesByMonth = new HashMap<>();
+    private ArrayList<Object> objects = new ArrayList<>();
+    private ArrayList<Integer> sectionIndexes = new ArrayList<>();
 
     public FileAdapter(ArrayList<File> files) {
         this.files = files;
@@ -44,6 +37,19 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             filesValue.add(file);
             filesByMonth.put(month, filesValue);
         }
+        if (files.size() > 0) {
+            sectionIndexes.add(0);
+        }
+        int count = 0;
+        for (String key : filesByMonth.keySet()){
+            count += filesByMonth.get(key).size()+1;
+            sectionIndexes.add(count);
+            objects.add(key);
+            objects.addAll(filesByMonth.get(key));
+        }
+        sectionIndexes.remove(sectionIndexes.size()-1);
+
+        System.out.println(filesByMonth);
     }
 
     @Override
@@ -58,13 +64,14 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        final File file = files.get(position - getNumberHeaderPast(position));
-
         if (holder.getItemViewType() == TYPE_HEADER) {
+            final String month = (String) objects.get(position);
+
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
-            headerViewHolder.fileHeaderTitle.setText(monthFormat.format(file.getCreatedAt()));
+            headerViewHolder.fileHeaderTitle.setText(month);
             return;
         }
+        final File file = (File) objects.get(position);
 
         FileViewHolder fileViewHolder = (FileViewHolder) holder;
         fileViewHolder.fileItemAuthor.setText(file.getAuthor() + " : ");
@@ -89,7 +96,7 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return files.size() + filesByMonth.keySet().size();
+        return objects.size();
     }
 
     @Override
@@ -101,26 +108,7 @@ public class FileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private boolean isPositionHeader(int position) {
-        ArrayList<Integer> headerPosition = new ArrayList<>();
-        headerPosition.add(0);
-        for(Map.Entry<String, ArrayList<File>> entry : filesByMonth.entrySet()) {
-            headerPosition.add(entry.getValue().size() + 1);
-        }
-        return headerPosition.contains(position);
-    }
-
-    private int getNumberHeaderPast(int position) {
-        ArrayList<Integer> headerPositions = new ArrayList<>();
-        headerPositions.add(0);
-        for(Map.Entry<String, ArrayList<File>> entry : filesByMonth.entrySet()) {
-            headerPositions.add(entry.getValue().size() + 1);
-        }
-        for (int i = 1; i < headerPositions.size(); i++) {
-            if (position > headerPositions.get(i-1) && position <= headerPositions.get(i)) {
-                return i+1;
-            }
-        }
-        return 0;
+        return sectionIndexes.contains(position);
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {

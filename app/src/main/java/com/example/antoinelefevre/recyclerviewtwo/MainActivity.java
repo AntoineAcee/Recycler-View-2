@@ -34,7 +34,23 @@ public class MainActivity extends AppCompatActivity {
         files.add(new File("Diagnostics Reports", "Ayush Kumar", new Timestamp(date.getTime()), File.FileType.EXCEL));
         files.add(new File("Design Effort", "Ayush Kumar", new Timestamp(date.getTime()), File.FileType.PDF));
 
-        try { date = dateFormat.parse("12/02/2019"); } catch (ParseException e) {}
+        try { date = dateFormat.parse("12/07/2019"); } catch (ParseException e) {}
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+
+
+
+        try { date = dateFormat.parse("12/10/2019"); } catch (ParseException e) {}
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+        files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
+
+
+
+        try { date = dateFormat.parse("11/01/2019"); } catch (ParseException e) {}
         files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
         files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
         files.add(new File("Lab Tests", "Samar Mahajan", new Timestamp(date.getTime()), File.FileType.WORD));
