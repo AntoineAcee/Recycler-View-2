@@ -57,7 +57,7 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         objects.addAll(amAppointments);
 
         if (pmAppointments.size() > 0) {
-            sectionIndexes.add(amAppointments.size()+1);
+            sectionIndexes.add(amAppointments.size() + sectionIndexes.size());
             AppointmentHeader pmHeader = new AppointmentHeader(false, pmAppointments.size(), pmAppointments.get(0).getDate(), pmAppointments.get(pmAppointments.size()-1).getDate());
             objects.add(pmHeader);
         }
