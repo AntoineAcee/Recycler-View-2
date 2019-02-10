@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ddd"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/appointment_header_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Morning"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:id="@+id/appointment_header_meet_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(2)"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/appointment_header_title"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:id="@+id/appointment_header_start_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8:30 AM"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/appointment_header_meet_number"
+        android:layout_margin="5dp"
+        />
+
+    <TextView
+        android:id="@+id/appointment_header_end_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:00 PM"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/appointment_header_start_hour"
+        android:layout_margin="5dp"
+        />
+
+</android.support.constraint.ConstraintLayout>
