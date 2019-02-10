@@ -3,30 +3,30 @@ package com.example.antoinelefevre.recyclerviewtwo;
 import android.media.Image;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class Appointment {
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+
     public enum Status {
-        CANCELED, ACCEPTED, NOT_SHOW
+        CANCELED, ACCEPTED, NO_SHOW
     }
     private User user;
     private Timestamp date;
-    private Timestamp startedAt;
     private boolean amOrPm;
     private String reason;
     private Status status;
 
-    public Appointment(User user, Timestamp date, Timestamp startedAt, boolean amOrPm, String reason) {
+    public Appointment(User user, Timestamp date, boolean amOrPm, String reason) {
         this.user = user;
         this.date = date;
-        this.startedAt = startedAt;
         this.amOrPm = amOrPm;
         this.reason = reason;
     }
 
-    public Appointment(User user, Timestamp date, Timestamp startedAt, boolean amOrPm, String reason, Status status) {
+    public Appointment(User user, Timestamp date, boolean amOrPm, String reason, Status status) {
         this.user = user;
         this.date = date;
-        this.startedAt = startedAt;
         this.amOrPm = amOrPm;
         this.reason = reason;
         this.status = status;
@@ -40,11 +40,11 @@ public class Appointment {
         return date;
     }
 
-    public Timestamp getStartedAt() {
-        return startedAt;
+    public String getAmOrPm() {
+        return amOrPm ? "AM" : "PM";
     }
 
-    public boolean getAmOrPm() {
+    public boolean isAm() {
         return amOrPm;
     }
 
@@ -52,7 +52,43 @@ public class Appointment {
         return reason;
     }
 
-    public Status getStatus() {
-        return status;
+    public String getStatus() {
+        switch (status) {
+            case ACCEPTED:
+                return "Accepted";
+            case CANCELED:
+                return "Canceled";
+            case NO_SHOW:
+                return "No Show";
+        }
+        return null;
+    }
+
+    public void setDateFormat(SimpleDateFormat dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setDate(Timestamp date) {
+        this.date = date;
+    }
+
+    public void setAmOrPm(boolean amOrPm) {
+        this.amOrPm = amOrPm;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getFormatedDate() {
+        return dateFormat.format(date);
     }
 }
