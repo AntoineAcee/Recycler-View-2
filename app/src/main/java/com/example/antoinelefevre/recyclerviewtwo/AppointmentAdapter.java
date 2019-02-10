@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
 public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private ArrayList<Appointment> appointments;
     private ArrayList<Object> objects = new ArrayList<>();
+    private ArrayList<Integer> sectionIndexes = new ArrayList<>();
+
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
@@ -45,12 +47,14 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
         if (amAppointments.size() > 0) {
+            sectionIndexes.add(0);
             AppointmentHeader amHeader = new AppointmentHeader(true, amAppointments.size(), amAppointments.get(0).getDate(), amAppointments.get(amAppointments.size()-1).getDate());
             objects.add(amHeader);
         }
         objects.addAll(amAppointments);
 
         if (pmAppointments.size() > 0) {
+            sectionIndexes.add(amAppointments.size()+1);
             AppointmentHeader pmHeader = new AppointmentHeader(false, pmAppointments.size(), pmAppointments.get(0).getDate(), pmAppointments.get(pmAppointments.size()-1).getDate());
             objects.add(pmHeader);
         }
@@ -96,6 +100,18 @@ public class AppointmentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         return objects.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (isPositionHeader(position))
+            return TYPE_HEADER;
+
+        return TYPE_ITEM;
+    }
+
+    private boolean isPositionHeader(int position) {
+        return sectionIndexes.contains(position);
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
